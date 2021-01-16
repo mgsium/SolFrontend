@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
@@ -11,7 +12,7 @@ import Styles from "./HomeStyles";
 import Template from "../Template/Template";
 import Col from "react-bootstrap/esm/Col";
 
-import { GitHub, Heart, Link, Plus, Search } from "react-feather";
+import { GitHub, Heart, Link as LinkIcon, Plus, Search } from "react-feather";
 import LessonCard from "../LessonCard/LessonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -39,16 +40,20 @@ export default class Home extends React.Component<Props, State> {
                     <h1 style={{ fontFamily: "Open Sans, sans-serif", marginBottom: 20 }}>Learning Made <span style={{ fontWeight: 600, color: "#EA6400" }}>Easy</span></h1>
                     <Row>
                         <div style={{ display: "table", marginLeft: "auto", marginRight: "auto" }}>
-                            <Button className={ cx( Styles.HeaderButton ) }>
-                                <GitHub/>
-                                &nbsp;
-                                Github
-                            </Button>
-                            <Button className={ cx( Styles.HeaderButton ) }>
-                                <Link/>
-                                &nbsp;
-                                Devpost
-                            </Button>
+                            <a href="https://github.com/mgsium/SolFrontend" target="_blank">
+                                <Button className={ cx( Styles.HeaderButton ) }>
+                                    <GitHub/>
+                                    &nbsp;
+                                    Github
+                                </Button>
+                            </a>
+                            <a href="" target="_blank">
+                                <Button className={ cx( Styles.HeaderButton ) }>
+                                    <LinkIcon/>
+                                    &nbsp;
+                                    Devpost
+                                </Button>
+                            </a>
                         </div>
                     </Row>
                 </div>
@@ -65,44 +70,53 @@ export default class Home extends React.Component<Props, State> {
                     </Col>
                     <Col md={2}>
                         {/* TODO: Add an overlay trigger */}
-                        <OverlayTrigger
-                            placement="bottom"
-                            delay={{ show: 150, hide: 100 }}
-                            trigger="hover"
-                            overlay={(
-                                <Tooltip id="create-lesson-button-tooltip" style={{ fontSize: 18 }}>
-                                    Create a Lesson
-                                </Tooltip>
-                            )}
-                        >
-                            <Button 
-                                variant="success"
-                                className={ cx( Styles.createLessonButtonStyles, (this.props.dark ? Styles.createLessonButtonStylesDark : null), "shadow-sm") }
-                            >
-                                <Plus size={48}/>
-                            </Button>
-                        </OverlayTrigger>
+                        <Link to="/editor">
+                            <OverlayTrigger
+                                placement="bottom"
+                                delay={{ show: 150, hide: 100 }}
+                                trigger="hover"
+                                overlay={(
+                                    <Tooltip id="create-lesson-button-tooltip" style={{ fontSize: 18 }}>
+                                        Create a Lesson
+                                    </Tooltip>
+                                )}
+                            >   
+                                <Button 
+                                    variant="success"
+                                    className={ cx( Styles.createLessonButtonStyles, (this.props.dark ? Styles.createLessonButtonStylesDark : null), "shadow-sm") }
+                                >
+                                    <Plus size={48}/>
+                                </Button>
+                            </OverlayTrigger>
+                        </Link>
                     </Col>
                 </Row>
                 <br/><br/><br/>
                 <Row>
                     <Col md={6}>
-                        <LessonCard/>
+                        <LessonCard lesson={{
+                            id: "hardly-done-here",
+                            video_url: "https://www.youtube.com/embed/W7qWa52k-nE",
+                            description: "This is a short sample description for this sample lesson on Sol so I can test out how everything looks before I implement it for real.",
+                            author_name: "Tyler Durden",
+                            more_info: "",
+                            header: "How to Learn with Sol",
+                            questions: [],
+                            timestamp: "Some time here"
+                        }}/>
                     </Col>
                     <Col md={6}>
-                        <LessonCard/>
+                        <LessonCard lesson={{
+                            id: "hardly-done-here",
+                            video_url: "https://www.youtube.com/embed/ymgoem4v4u4",
+                            description: "This is a short sample description for this sample lesson on Sol so I can test out how everything looks before I implement it for real.",
+                            author_name: "Tyler Durden",
+                            more_info: "",
+                            header: "How (Not) to Become a Space Monkey",
+                            questions: [],
+                            timestamp: "Some time here"
+                        }}/>
                     </Col>
-                </Row>
-                <br/><br/><br/>
-                <Row style={{ padding: 15, paddingBottom: 8 }}>
-                    <div style={{ width: "100%", textAlign: "center" }}>
-                        <small style={{ fontFamily: "Roboto, sans-serif", fontSize: 18 }}>Made with <FontAwesomeIcon color="red" icon={faHeart}/> in the UK</small>
-                    </div>
-                </Row>
-                <Row style={{ padding: 15, paddingTop: 8 }}>
-                    <div style={{ width: "100%", textAlign: "center" }}>
-                        <small style={{ fontFamily: "Roboto, sans-serif" }}>2021 Musab Guma'a & Mustafa Choudhry</small>
-                    </div>
                 </Row>
             </Template>
         )
