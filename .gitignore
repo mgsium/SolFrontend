@@ -1,0 +1,11 @@
+node_modules/
+.vscode
+.idea
+.eslintcache
+build
+dist
+debug.log
+venv
+__pycache__
+geckodriver.log
+.pytest_cache
