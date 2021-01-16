@@ -12,6 +12,8 @@ import { ArrowRight } from "react-feather";
 import SectionBody from "./SectionBody/SectionBody";
 import QuestionPanel from '../Classroom/QuestionPanel/QuestionPanel';
 
+import ReactPlayer from "react-player"
+
 type Props = {};
 type State = {
     lessonDescription: {value:string, count:number},
@@ -139,12 +141,7 @@ export default class Editor extends React.Component<Props, State> {
                             </Row>
                             <br/>
 
-                            <div className={ cx( Styles.videoWrapper ) }>
-                                <div style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
-                                    <iframe src={this.state.youtubeURL} style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
-                                </div>
-                                    
-                            </div>
+                            <ReactPlayer url={this.state.youtubeURL} className={ cx( Styles.videoWrapper) } />
                             <br/>
 
                             <Row>

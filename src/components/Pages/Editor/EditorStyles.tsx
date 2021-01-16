@@ -29,10 +29,15 @@ const Styles = {
 
     videoWrapper: css`
         width: 100%;
-        max-width: 600px;
+        max-width: 800px;
         display: table;
         margin-left: auto;
         margin-right: auto;
+        
+        iframe{
+            border-radius: 20px;
+            border-bottom: 10px;
+        }
 
         @media screen and (max-width: 600px) {
             width: 100%;
