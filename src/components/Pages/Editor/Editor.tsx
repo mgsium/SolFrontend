@@ -110,6 +110,7 @@ export default class Editor extends React.Component<Props, State> {
 
                 :   <div id="lessonCreationPage">
                         <Col>
+
                             <Row>
                                 <Form.Control 
                                     id="lesson-youtube-url"
@@ -119,10 +120,15 @@ export default class Editor extends React.Component<Props, State> {
                                     className={ cx( Styles.URLBarStyles, "shadow-sm" ) }
                                     onKeyDown={null}
                                 />
-                            </Row>  
-                            <Row>
-                                <iframe src="https://www.youtube.com/embed/ymgoem4v4u4" style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
                             </Row>
+                            <br/>
+
+                            <div className={ cx( Styles.videoWrapper ) }>
+                                <div style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
+                                    <iframe src="https://www.youtube.com/embed/ymgoem4v4u4" style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
+                                </div>    
+                            </div>
+
                         </Col>
                     </div>
                 }    

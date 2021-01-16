@@ -21,8 +21,19 @@ const Styles = {
         &:focus, &:active {
             border: 1px solid whitesmoke !important;
         }
-    `
+    `,
 
+    videoWrapper: css`
+        width: 50%;
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+
+        @media screen and (max-width: 600px) {
+            width: 100%;
+        }
+
+    `
 }
 
 export default Styles;

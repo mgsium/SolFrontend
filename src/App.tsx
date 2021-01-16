@@ -13,8 +13,8 @@ export default class App extends React.Component<Props, State> {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/"                   component={ Editor }/>
-                    <Route path="/editor"                   component={ Home }/>
-                    <Route path="/classroom"                component={ Classroom }/>
+                    <Route path="/editor"                   component={ Classroom }/>
+                    <Route path="/classroom"                component={ Home }/>
                 </Switch>
             </BrowserRouter>
         )
