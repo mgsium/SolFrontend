@@ -20,7 +20,6 @@
     "@types/webfontloader": "^1.6.32",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-player": "^2.7.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "source-map-loader": "^1.0.0"
@@ -39,6 +38,7 @@
     "jquery": "^3.5.1",
     "react-bootstrap": "^1.2.2",
     "react-feather": "^2.0.9",
+    "react-player": "^2.7.2",
     "typescript": "^3.9.5",
     "webfontloader": "^1.6.28",
     "webpack": "^4.43.0",
