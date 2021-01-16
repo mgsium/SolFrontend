@@ -21,7 +21,7 @@ export default class LessonCard extends React.Component<Props, State> {
     render() {
         return (
             <div className={cx( Styles.cardStyles, "shadow-sm" )}>
-                <div className="video_wrapper" style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
+                <div style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
                     <iframe src={this.props.lesson.video_url} style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
                 </div>
                 <h2>

@@ -39,7 +39,7 @@ export default class Classroom extends React.Component<Props, State> {
             <Template>
                 <h2 style={{ textAlign: "center", fontFamily: "Open Sans, sans-serif" }}>{this.state.lesson.header}</h2>
                 <br/>
-                <div className="video_wrapper" style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
+                <div style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
                     <iframe src={this.state.lesson.video_url} style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
                 </div>
                 <br/>
