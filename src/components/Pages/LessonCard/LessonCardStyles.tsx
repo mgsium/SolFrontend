@@ -6,6 +6,7 @@ const Styles = {
         border-radius: 20px;
         width: 100%;
         padding: 20px;
+        margin-bottom: 10px;
     `,
     upvoteStyles: css`
         &:hover {

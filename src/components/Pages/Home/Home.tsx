@@ -16,21 +16,54 @@ import { GitHub, Heart, Link as LinkIcon, Plus, Search } from "react-feather";
 import LessonCard from "../LessonCard/LessonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import LessonStructureMap from "../../../helpers/LessonStructureMap";
+import LessonSwitch from "../../../httpclient/LessonSwitch";
+
+import $ from "jquery";
 
 type Props = {
     performLessonSearch: Function,
     dark: boolean
 };
-type State = {};
+type State = {
+    lessonStructureMap: LessonStructureMap
+};
 
 export default class Home extends React.Component<Props, State> {
 
+    private static MAX_RESULTS = 20;
+
     constructor(props: Props) {
         super(props);
+
+        this.state = {
+            lessonStructureMap: new LessonStructureMap()
+        }
+
+        // Method Bindings
+        this.performLessonSearch = this.performLessonSearch.bind(this);
     }
 
-    performLessonSearch() {
+    componentDidMount() {
+        // Preprocessing
+        this.performLessonSearch();
 
+        $(window).on("scroll", () => {
+            var scrollHeight = $(document).height();
+            var scrollPos = $(window).height() + $(window).scrollTop();
+            console.log(scrollHeight);
+            console.log(scrollPos);
+            // @ts-ignore
+            if ((scrollHeight as number - Math.floor(scrollPos)) / scrollHeight as number == 0) {
+                this.performLessonSearch();
+            }
+        });
+    }
+
+    
+
+    performLessonSearch() {
+        LessonSwitch.getRandomLessons(Home.MAX_RESULTS, this);
     }
 
     render() {
@@ -92,32 +125,15 @@ export default class Home extends React.Component<Props, State> {
                     </Col>
                 </Row>
                 <br/><br/><br/>
-                <Row>
+                <Row id="lessonboard">
                     <Col md={6}>
-                        <LessonCard lesson={{
-                            id: "hardly-done-here",
-                            video_url: "https://www.youtube.com/embed/W7qWa52k-nE",
-                            description: "This is a short sample description for this sample lesson on Sol so I can test out how everything looks before I implement it for real.",
-                            author_name: "Tyler Durden",
-                            more_info: "",
-                            header: "How to Learn with Sol",
-                            questions: [],
-                            timestamp: "Some time here"
-                        }}/>
+                        {this.state.lessonStructureMap.getColumnOneLessonWidgets()}
                     </Col>
                     <Col md={6}>
-                        <LessonCard lesson={{
-                            id: "hardly-done-here",
-                            video_url: "https://www.youtube.com/embed/ymgoem4v4u4",
-                            description: "This is a short sample description for this sample lesson on Sol so I can test out how everything looks before I implement it for real.",
-                            author_name: "Tyler Durden",
-                            more_info: "",
-                            header: "How (Not) to Become a Space Monkey",
-                            questions: [],
-                            timestamp: "Some time here"
-                        }}/>
+                        {this.state.lessonStructureMap.getColumnTwoLessonWidgets()}
                     </Col>
                 </Row>
+                <br/><br/><br/><br/><br/><br/>
             </Template>
         )
     }

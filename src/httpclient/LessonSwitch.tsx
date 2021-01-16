@@ -1,3 +1,5 @@
+import LessonStructureMap from "../helpers/LessonStructureMap";
+
 export default class LessonSwitch {
     static backend_url = "http://localhost:8443";
     static lesson_controller_path = "/api/v1/lesson";
@@ -30,7 +32,7 @@ export default class LessonSwitch {
     };
 
     static async getLesson(id: string, component: React.Component) {
-        return await fetch(`${this.backend_url}${this.lesson_controller_path}/get/${id}`, {
+        await fetch(`${this.backend_url}${this.lesson_controller_path}/get/${id}`, {
             "headers": this.std_get_req_headers,
             "referrerPolicy": "strict-origin-when-cross-origin",
             "mode": "cors",
@@ -40,4 +42,22 @@ export default class LessonSwitch {
         .then( res => res.json() )
         .then( data => { component.setState({ lesson: data, loading: false }); } );
     }
+
+    static async getRandomLessons(maxResults: number, component: React.Component) {
+        await fetch(`${this.backend_url}${this.lesson_controller_path}/get/random/${maxResults}`, {
+            "headers": this.std_get_req_headers,
+            "referrerPolicy": "strict-origin-when-cross-origin",
+            "mode": "cors",
+            "method": "GET",
+            "credentials": "include"
+        })
+        .then( res => res.json() )
+        .then( data => { 
+            // @ts-ignore
+            const lessonStructureMap = component.state.lessonStructureMap;
+            lessonStructureMap.addLessons(data); 
+            component.setState({ lessonStructureMap: lessonStructureMap });
+        } );
+    }
+
 }
