@@ -32,7 +32,7 @@ export default class Template extends React.Component<Props, State> {
                     </Row>
                     <Row style={{ padding: 15, paddingTop: 8 }}>
                         <div style={{ width: "100%", textAlign: "center" }}>
-                            <small style={{ fontFamily: "Roboto, sans-serif" }}>2021 Musab Guma'a & Mustafa Choudhry</small>
+                            <small style={{ fontFamily: "Roboto, sans-serif" }}>2021 Musab Guma'a & Mustafa Chaudhry</small>
                         </div>
                     </Row>
                 </TemplateBody>
