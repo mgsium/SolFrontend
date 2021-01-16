@@ -4,8 +4,12 @@ const Styles = {
     submitButtonStyles: css`
         display: block;
         width: 100%;
+        max-width: 600px;
         padding: 25px;
         border-radius: 20px;
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
     `,
 
     URLBarStyles: css`
@@ -24,7 +28,8 @@ const Styles = {
     `,
 
     videoWrapper: css`
-        width: 50%;
+        width: 100%;
+        max-width: 600px;
         display: table;
         margin-left: auto;
         margin-right: auto;

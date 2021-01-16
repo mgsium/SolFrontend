@@ -10,45 +10,60 @@ import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import { ArrowRight } from "react-feather";
 import SectionBody from "./SectionBody/SectionBody";
+import QuestionPanel from '../Classroom/QuestionPanel/QuestionPanel';
 
 type Props = {};
-type State = {};
+type State = {
+    lessonDescription: {value:string, count:number},
+    showingLessonPage: boolean,
+    youtubeURL: string,
+    currentPage: 0 | 1 | 2 
+};
 
 
 export default class Editor extends React.Component<Props, State> {
 
     descriptionCharsMax:number = 280
-
-
-    state = {
-
-        lessonDescription: {
-          value: '',
-          count: 0,
-        },
-
-        showingLessonPage: false,
-
-    };
+    
 
     constructor(props: Props) {
         super(props);
+
+        this.state = {
+
+            lessonDescription: {
+              value: '',
+              count: 0,
+            },
+    
+            showingLessonPage: false,
+            youtubeURL: "",
+            currentPage: 0,
+    
+        };
+
+        this.setURL= this.setURL.bind(this);
+
     }
 
     handleChange = (e:any) => {
-    if(e.target.value.length > this.descriptionCharsMax) return;
-    this.setState({[e.target.name]: {value: e.target.value, count: e.target.value.length }});
+        if(e.target.value.length > this.descriptionCharsMax) return;
+        this.setState({lessonDescription: {value: e.target.value, count: e.target.value.length }});
+    }
+
+    setURL(e:any) {
+        this.setState({youtubeURL: e.target.value});
     }
 
     render() {
 
         const { lessonDescription } = this.state;
         const { showingLessonPage } = this.state;
+        console.log(this.state.youtubeURL)
 
         return (
             <Template>
-                { !showingLessonPage
-                ?   <div id="lessonDetailsPage">
+                    <div id="lessonDetailsPage" hidden={ this.state.currentPage != 0 }>
                         <h1 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif" }}>Create a Lesson</h1>
                         <h6 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif", color: "#6c757d" }}>Add the details here - You'll create the actual lesson on the next page</h6>
 
@@ -103,12 +118,12 @@ export default class Editor extends React.Component<Props, State> {
                         </SectionBody>
                         <br/><br/>
 
-                        <Button variant="success" className={cx( Styles.submitButtonStyles, "shadow-sm" )} onClick={() => this.setState({ showingLessonPage: !showingLessonPage })}>
+                        <Button variant="success" className={cx( Styles.submitButtonStyles, "shadow-sm" )} onClick={() => this.setState({ currentPage: 1 })}>
                             <h3 style={{ margin: 0, display: "inline-block" }}>Continue&nbsp;<ArrowRight/></h3>
                         </Button>
                     </div>
 
-                :   <div id="lessonCreationPage">
+                    <div id="lessonCreationPage" hidden={ this.state.currentPage != 1 }>
                         <Col>
 
                             <Row>
@@ -116,22 +131,30 @@ export default class Editor extends React.Component<Props, State> {
                                     id="lesson-youtube-url"
                                     type="text" 
                                     size="lg"
-                                    placeholder="Input Youtube URL..." 
+                                    placeholder="Input Youtube URL..."
                                     className={ cx( Styles.URLBarStyles, "shadow-sm" ) }
-                                    onKeyDown={null}
+                                    onChange={this.setURL}
+                                    style={{ textAlign: "center" }}
                                 />
                             </Row>
                             <br/>
 
                             <div className={ cx( Styles.videoWrapper ) }>
                                 <div style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
-                                    <iframe src="https://www.youtube.com/embed/ymgoem4v4u4" style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
-                                </div>    
+                                    <iframe src={this.state.youtubeURL} style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
+                                </div>
+                                    
                             </div>
+                            <br/>
+
+                            <Row>
+                                <Button variant="success" className={cx( Styles.submitButtonStyles, "shadow-sm" )} onClick={null}>
+                                    <h3 style={{ margin: 0, display: "inline-block" }}>Confirm Video&nbsp;<ArrowRight/></h3>
+                                </Button>
+                            </Row>
 
                         </Col>
-                    </div>
-                }    
+                    </div> 
             </Template>
         )
     }
