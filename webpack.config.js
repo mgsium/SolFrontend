@@ -5,7 +5,8 @@ module.exports = {
     entry: "./src/index.tsx",
     output: {
         path: path.join(__dirname, "/dist"),
-        filename: "main.js"
+        filename: "main.js",
+        publicPath: "/"
     },
     module: {
         rules: [
@@ -28,6 +29,9 @@ module.exports = {
             template: "./public/index.html"
         })
     ],
+    devServer: {
+        historyApiFallback: true,
+    },
     resolve: {
         extensions: [".tsx", ".ts", ".js"]
     }
