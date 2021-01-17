@@ -54,7 +54,11 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
                         />
                     </Row>
                     <br/>
-                    <ReactPlayer url={ this.state.videoUrl } className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } hidden={!this.state.videoUrl}/>
+                    <div style={{ width: "100%", maxWidth: 800, display: "table", marginLeft: "auto", marginRight: "auto" }}>
+                        <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                            <ReactPlayer url={ this.state.videoUrl } className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } hidden={!this.state.videoUrl} width="100%" height="100%"/>
+                        </div>
+                    </div>
                     <div hidden={!!this.state.videoUrl} className={cx( EditorStyles.videoWrapperSizeModifier )} style={{ background: "rgba(0, 0, 0, 0.05)", borderRadius: 20, height: 400, display: "table", marginLeft: "auto", marginRight: "auto" }}></div>
                     <br/>
                     <Row>

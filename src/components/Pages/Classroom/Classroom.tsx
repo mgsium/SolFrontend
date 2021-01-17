@@ -45,10 +45,8 @@ export default class Classroom extends React.Component<Props, State> {
                 <h2 style={{ textAlign: "center", fontFamily: "Open Sans, sans-serif" }}>{this.state.lesson.header}</h2>
                 <p style={{ textAlign: "center", fontFamily: "Roboto, sans-serif", color: "#666" }}>{this.state.lesson.description}</p>
                 <br/>
-                <div>
-                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
-                        <ReactPlayer url={ this.state.lesson.video_url } className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } width="100%" height="100%"/>
-                    </div>
+                <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                    <ReactPlayer url={ this.state.lesson.video_url } className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } width="100%" height="100%"/>
                 </div>
                 <br/>
                 <div hidden>

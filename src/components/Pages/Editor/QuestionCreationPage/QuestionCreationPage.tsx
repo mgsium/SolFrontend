@@ -72,7 +72,11 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
                     <h1 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif" }}>Add Questions</h1>
                     <h6 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif", color: "#6c757d" }}>Set questions at specific points in the video to help your audience better engage with their learning!</h6>
                     <br/>
-                    <ReactPlayer ref={this.ref} controls url={ this.props.videoUrl } playing={!this.state.showQuestionCreationModal && !this.state.finished} className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) }/>
+                    <div style={{ width: "100%", maxWidth: 800, display: "table", marginLeft: "auto", marginRight: "auto" }}>
+                        <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                            <ReactPlayer ref={this.ref} controls url={ this.props.videoUrl } playing={!this.state.showQuestionCreationModal && !this.state.finished} className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } width="100%" height="100%"/>
+                        </div>
+                    </div>
                     <br/>
                     <div style={{ color: "red", fontSize: "17pt", fontFamily: "Space Mono, monospace", display: "table", marginLeft: "auto", marginRight: "auto" }}>{this.props.questions.length} Questions</div>
                     <br/>
