@@ -51,8 +51,6 @@ export default class Home extends React.Component<Props, State> {
         $(window).on("scroll", () => {
             var scrollHeight = $(document).height();
             var scrollPos = $(window).height() + $(window).scrollTop();
-            console.log(scrollHeight);
-            console.log(scrollPos);
             // @ts-ignore
             if ((scrollHeight as number - Math.floor(scrollPos)) / scrollHeight as number == 0) {
                 this.performLessonSearch();
