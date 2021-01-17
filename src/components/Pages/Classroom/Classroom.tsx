@@ -12,6 +12,8 @@ import ReactPlayer from "react-player";
 import Col from "react-bootstrap/esm/Col";
 import Question from "../../../types/Question";
 
+import $ from "jquery";
+
 type Props = {};
 type State = {
     loading: boolean,
@@ -87,7 +89,7 @@ export default class Classroom extends React.Component<Props, State> {
     ref = (player: ReactPlayer) => {
         this.player = player;
     }
-
+    
     render() {
         if (this.state.loading) {
             return (

@@ -10,6 +10,8 @@ import Row from "react-bootstrap/esm/Row";
 import { ArrowRight } from "react-feather";
 import ReactPlayer from "react-player";
 
+import $ from "jquery";
+
 type Props = {
     currentPageIndex: 0 | 1 | 2 | 3,
     updatePageIndex: Function,

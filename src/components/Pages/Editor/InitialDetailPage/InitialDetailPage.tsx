@@ -10,6 +10,8 @@ import { ArrowRight } from "react-feather";
 import SectionBody from "../SectionBody/SectionBody";
 import SectionHeader from "../SectionHeader/SectionHeader";
 
+import $ from "jquery";
+
 type Props = {
     currentPageIndex: 0 | 1 | 2 | 3,
     updatePageIndex: Function,
@@ -66,6 +68,10 @@ export default class InitialDetailPage extends React.Component<Props, State> {
         this.setState({ more_info: e.target.value });
     }
 
+    fieldsAreValid() {
+        return !!$("#header_field").val() && !!$("#description_field").val();
+    }
+
     render() {
         return (
             <div id="lessonDetailsPage" hidden={ this.props.currentPageIndex != 0 }>
@@ -79,6 +85,7 @@ export default class InitialDetailPage extends React.Component<Props, State> {
                             <Form.Label>Lesson Header</Form.Label>
                             <Form.Control 
                                 placeholder="Title your lesson..." 
+                                id="header_field"
                                 size="lg"
                                 maxLength={this.headerCharacterLimit}
                                 value={this.state.header}
@@ -94,6 +101,7 @@ export default class InitialDetailPage extends React.Component<Props, State> {
                             <Form.Label>Lesson Description</Form.Label>
                             <Form.Control 
                                 placeholder="Describe your lesson..." 
+                                id="description_field"
                                 as="textarea" 
                                 rows={3}
                                 maxLength={this.descriptionCharacterLimit} 
@@ -119,6 +127,7 @@ export default class InitialDetailPage extends React.Component<Props, State> {
                             <Form.Label>Your Name (Optional)</Form.Label>
                             <Form.Control 
                                 placeholder="Your Name..." 
+                                id="author_name_field"
                                 size="lg"
                                 maxLength={this.authorNameCharacterLimit}
                                 value={this.state.author_name}
@@ -152,7 +161,7 @@ export default class InitialDetailPage extends React.Component<Props, State> {
                 </SectionBody>
                 <br/><br/>
 
-                <Button variant="success" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} onClick={() => { this.props.updatePageIndex(1); this.props.confirmInitialDetails(this.state.header, this.state.description, this.state.author_name, this.state.more_info); }}>
+                <Button variant="success" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} onClick={() => { this.props.updatePageIndex(1); this.props.confirmInitialDetails(this.state.header, this.state.description, this.state.author_name, this.state.more_info); }} disabled={!this.fieldsAreValid()}>
                     <h3 style={{ margin: 0, display: "inline-block" }}>Continue&nbsp;<ArrowRight/></h3>
                 </Button>
             </div>

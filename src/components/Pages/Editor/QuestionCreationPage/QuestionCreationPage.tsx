@@ -13,7 +13,7 @@ import { ArrowRight, Plus } from "react-feather";
 import { faTheRedYeti } from "@fortawesome/free-brands-svg-icons";
 import Form from "react-bootstrap/esm/Form";
 import QuestionBuilder from "./QuestionBuilder";
-import QuestionCreationModal from "./QuestionCreationModal/QuestionCreation";
+import QuestionCreationModal from "./QuestionCreationModal/QuestionCreationModal";
 import Question from "../../../../types/Question";
 
 type Props = {
@@ -93,7 +93,7 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
                     </Row>
                     <br/>
                     {
-                        this.props.questions.map( q => (
+                        this.props.questions.sort((a, b) => a.timestamp-b.timestamp ).map( q => (
                             <div className={cx( Styles.questionContainer)}>
                                 <h4 style={{ textAlign: "center", fontFamily: "Roboto, sans-serif", margin: 0 }}><strong>{q.header}</strong> ({this.formatTime(q.timestamp)})</h4>
                             </div>
@@ -101,7 +101,7 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
                     }
                     <br/>
                     <Row>
-                        <Button variant="success" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} style={{ width: "100%" }} onClick={() => { this.setState({ finished: true }); this.props.updatePageIndex(3); this.props.submitLesson(); }}>
+                        <Button variant="success" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} style={{ width: "100%" }} onClick={() => { this.setState({ finished: true }); this.props.updatePageIndex(3); this.props.submitLesson(); }} disabled={this.props.questions.length === 0}>
                             <h3 style={{ margin: 0, display: "inline-block" }}>Finish!&nbsp;<ArrowRight/></h3>
                         </Button>
                     </Row>

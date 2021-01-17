@@ -9,8 +9,8 @@ export default class LessonStructureMap {
     private columnTwo: Array<Lesson>;
 
     constructor() {
-        this.columnOne = [];
-        this.columnTwo = [];
+        this.columnOne = new Array<Lesson>();
+        this.columnTwo = new Array<Lesson>();
     }
 
     addLessons(lessons: Array<Lesson>) {
@@ -28,6 +28,14 @@ export default class LessonStructureMap {
 
     getColumnTwoLessons() {
         return this.columnTwo;
+    }
+
+    setColumnOneLessons(lessons: Array<Lesson>) {
+        this.columnOne = lessons;
+    }
+
+    setColumnTwoLessons(lessons: Array<Lesson>) {
+        this.columnTwo = lessons;
     }
 
     getColumnOneLessonWidgets() {

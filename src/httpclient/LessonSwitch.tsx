@@ -46,6 +46,25 @@ export default class LessonSwitch {
         .then( data => { component.setState({ lesson: data, loading: false }); } );
     }
 
+    static async searchForLessons(searchString: string, component: React.Component) {
+        await fetch(`${this.backend_url}${this.lesson_controller_path}/get/search/${searchString}`, {
+            "headers": this.std_get_req_headers,
+            "referrerPolicy": "strict-origin-when-cross-origin",
+            "mode": "cors",
+            "method": "GET",
+            "credentials": "include"
+        })
+        .then( res => res.json() )
+        .then( data => {
+            // @ts-ignore
+            const lessonStructureMap = component.state.lessonStructureMap;
+            lessonStructureMap.setColumnOneLessons(new Array<Lesson>());
+            lessonStructureMap.setColumnTwoLessons(new Array<Lesson>());
+            lessonStructureMap.addLessons(data);
+            component.setState({ lessonStructureMap: lessonStructureMap });
+        } );
+    }
+
     static async getRandomLessons(maxResults: number, component: React.Component) {
         await fetch(`${this.backend_url}${this.lesson_controller_path}/get/random/${maxResults}`, {
             "headers": this.std_get_req_headers,
@@ -65,7 +84,6 @@ export default class LessonSwitch {
 
     // TODO: Change to a request which creates multiple Question objects and a lesson object at once.
 
-
     // TODO: Add Error Handling
     static async createLesson(lesson: Lesson) {
         await fetch(`${this.backend_url}${this.lesson_controller_path}/new`, {
@@ -75,18 +93,6 @@ export default class LessonSwitch {
             "mode": "cors",
             "credentials": "include",
             body: JSON.stringify(lesson)
-        });
-    }
-
-    // TODO: Add Error Handling
-    static async createQuestion(question: Question, lesson_id: string) {
-        await fetch(`${this.backend_url}${this.lesson_controller_path}/question/new/${lesson_id}`, {
-            "headers": this.std_post_req_headers,
-            "referrerPolicy": "strict-origin-when-cross-origin",
-            "method": "POST",
-            "mode": "cors",
-            "credentials": "include",
-            body: JSON.stringify(question)
         });
     }
 

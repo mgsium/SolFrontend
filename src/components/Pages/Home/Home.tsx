@@ -41,27 +41,34 @@ export default class Home extends React.Component<Props, State> {
         }
 
         // Method Bindings
-        this.performLessonSearch = this.performLessonSearch.bind(this);
+        this.performRandomLessonSearch = this.performRandomLessonSearch.bind(this);
+        this.performKeywordLessonSearch = this.performKeywordLessonSearch.bind(this);
     }
 
     componentDidMount() {
         // Preprocessing
-        this.performLessonSearch();
+        this.performRandomLessonSearch();
 
         $(window).on("scroll", () => {
             var scrollHeight = $(document).height();
             var scrollPos = $(window).height() + $(window).scrollTop();
             // @ts-ignore
             if ((scrollHeight as number - Math.floor(scrollPos)) / scrollHeight as number == 0) {
-                this.performLessonSearch();
+                this.performRandomLessonSearch();
             }
         });
     }
 
-    
 
-    performLessonSearch() {
+    performRandomLessonSearch() {
         LessonSwitch.getRandomLessons(Home.MAX_RESULTS, this);
+    }
+
+    performKeywordLessonSearch(e: any) {
+        const searchString: string = e.target.value;
+        if(e.key == 'Enter' && searchString) {
+            LessonSwitch.searchForLessons(searchString, this);
+        }
     }
 
     render() {
@@ -96,7 +103,7 @@ export default class Home extends React.Component<Props, State> {
                             size="lg"
                             placeholder="Scan the Matrix..." 
                             className={ cx( Styles.searchBarStyles, (this.props.dark ? Styles.searchBarStylesDark : null), "shadow-sm" ) }
-                            onKeyDown={this.performLessonSearch}
+                            onKeyPress={this.performKeywordLessonSearch}
                         />
                     </Col>
                     <Col md={2}>

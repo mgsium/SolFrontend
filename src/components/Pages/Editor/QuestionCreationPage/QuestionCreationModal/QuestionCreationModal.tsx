@@ -7,6 +7,8 @@ import Form from "react-bootstrap/esm/Form";
 import Modal from "react-bootstrap/esm/Modal";
 import QuestionBuilder from "../QuestionBuilder";
 
+import $ from "jquery";
+
 type Props = {
     timestamp: number,
     showModal: boolean,
@@ -75,7 +77,12 @@ export default class QuestionCreationModal extends React.Component<Props, State>
         questionBuilder.setTimestamp(this.props.timestamp);
         this.setState({ questionBuilder: questionBuilder }, () => {
             this.props.submitQuestion(this.state.questionBuilder.getQuestion());
+            this.setState({ questionBuilder: new QuestionBuilder() });
         });
+    }
+
+    fieldsAreValid() {
+        return !!$("#question_field").val() && !!$("#ans_one_field").val() && !!$("#ans_two_field").val() && !!$("#ans_three_field").val() && !!$("#ans_four_field").val();
     }
 
     render() {
@@ -86,16 +93,18 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                 </Modal.Header>
                 <Modal.Body style={{ fontFamily: "Roboto, sans-serif" }}>
                     <div style={{ width: "75%", display: "table", marginLeft: "auto", marginRight: "auto" }}>
-                    <Form>
+                    <Form id="#form">
                         <Form.Group controlId="formQuestionHeader">
                             <Form.Label>Question</Form.Label>
                             <Form.Control 
                                 placeholder="Enter a Question..." 
+                                id="question_field"
                                 size="lg"
                                 maxLength={this.headerCharacterLimit}
                                 value={this.state.questionBuilder.getHeader()}
                                 onChange={this.updateHeader}
                                 onFocus={this.updateHeader}
+                                defaultValue=""
                             />
                             <Form.Text className="text-muted">
                                 Type the question you want to ask here.
@@ -106,6 +115,7 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                             <Form.Label>Option One</Form.Label>
                             <Form.Control 
                                 placeholder="First Option..." 
+                                id="ans_one_field"
                                 size="lg"
                                 maxLength={this.answerCharacterLimit}
                                 value={this.state.questionBuilder.getAnsOne()}
@@ -121,6 +131,7 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                             <Form.Label>Option Two</Form.Label>
                             <Form.Control 
                                 placeholder="Second Option..." 
+                                id="ans_two_field"
                                 size="lg"
                                 maxLength={this.answerCharacterLimit}
                                 value={this.state.questionBuilder.getAnsTwo()}
@@ -136,6 +147,7 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                             <Form.Label>Option Three</Form.Label>
                             <Form.Control 
                                 placeholder="Third Option..." 
+                                id="ans_three_field"
                                 size="lg"
                                 maxLength={this.answerCharacterLimit}
                                 value={this.state.questionBuilder.getAnsThree()}
@@ -151,6 +163,7 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                             <Form.Label>Option Four</Form.Label>
                             <Form.Control 
                                 placeholder="Fourth Option..." 
+                                id="ans_four_field"
                                 size="lg"
                                 maxLength={this.answerCharacterLimit}
                                 value={this.state.questionBuilder.getAnsFour()}
@@ -165,7 +178,7 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                         <hr/>
                         <Form.Group controlId="formQuestionCorrectAnswer">
                             <Form.Label>Correct Answer</Form.Label>
-                            <Form.Control size="lg" as="select" onChange={this.updateCorrectAns}>
+                            <Form.Control size="lg" as="select" id="answer_field" onChange={this.updateCorrectAns}>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -177,6 +190,7 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                             <Form.Control 
                                 placeholder="Explain the answer in detail..." 
                                 as="textarea" 
+                                id="explanation_field"
                                 rows={3}
                                 maxLength={this.explanationCharacterLimit} 
                                 name="questionExplanation" 
@@ -195,7 +209,7 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                 <Modal.Footer style={{ borderTop: 0 }}>
                     <div style={{ width: "75%", display: "table", marginLeft: "auto", marginRight: "auto", marginBottom: 25 }}>
                         <div style={{ fontFamily: "Jost, sans-serif" }}>
-                            <Button variant="success" onClick={this.submitQuestion} style={{ width: "100%", borderRadius: 20, padding: 12, fontSize: "17pt" }}>&nbsp;Submit&nbsp;</Button>
+                            <Button variant="success" onClick={this.submitQuestion} style={{ width: "100%", borderRadius: 20, padding: 12, fontSize: "17pt" }} disabled={!this.fieldsAreValid()}>&nbsp;Submit&nbsp;</Button>
                         </div>
                     </div>
                 </Modal.Footer>

@@ -10,6 +10,11 @@ export default class LessonBuilder {
     private questions: Array<Question>
 
     public constructor() {
+        this.header = "";
+        this.description = "";
+        this.video_url = "";
+        this.author_name = "";
+        this.more_info = "";
         this.questions = new Array<Question>();
     }
 
