@@ -3,7 +3,8 @@ import Lesson from "../types/Lesson";
 import Question from "../types/Question";
 
 export default class LessonSwitch {
-    static backend_url = "http://localhost:8443";
+    static backend_url = "https://api.nmspace.org:8445";
+    // static backend_url = "http://localhost:8443";
     static lesson_controller_path = "/api/v1/lesson";
 
     static std_get_req_headers = {
