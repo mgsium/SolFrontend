@@ -12,8 +12,8 @@ export default class App extends React.Component<Props, State> {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/"                   component={ Home }/>
-                    <Route path="/editor"                   component={ Editor }/>
+                    <Route exact path="/"                       component={ Home }/>
+                    <Route path="/editor"                       component={ Editor }/>
                     <Route path="/classroom/:id"                component={ Classroom }/>
                 </Switch>
             </BrowserRouter>

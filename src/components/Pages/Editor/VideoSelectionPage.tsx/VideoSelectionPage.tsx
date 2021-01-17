@@ -11,7 +11,7 @@ import { ArrowRight } from "react-feather";
 import ReactPlayer from "react-player";
 
 type Props = {
-    currentPageIndex: 0 | 1 | 2,
+    currentPageIndex: 0 | 1 | 2 | 3,
     updatePageIndex: Function,
     confirmVideoUrl: Function
 };

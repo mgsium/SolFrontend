@@ -17,7 +17,7 @@ import QuestionCreationModal from "./QuestionCreationModal/QuestionCreation";
 import Question from "../../../../types/Question";
 
 type Props = {
-    currentPageIndex: 0 | 1 | 2,
+    currentPageIndex: 0 | 1 | 2 | 3,
     updatePageIndex: Function,
     videoUrl: string,
     addQuestionToLesson: Function,

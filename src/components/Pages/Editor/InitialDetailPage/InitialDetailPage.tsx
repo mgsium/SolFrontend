@@ -11,7 +11,7 @@ import SectionBody from "../SectionBody/SectionBody";
 import SectionHeader from "../SectionHeader/SectionHeader";
 
 type Props = {
-    currentPageIndex: 0 | 1 | 2,
+    currentPageIndex: 0 | 1 | 2 | 3,
     updatePageIndex: Function,
     confirmInitialDetails: Function
 };
