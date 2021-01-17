@@ -34,6 +34,7 @@ export default class QuestionCreationModal extends React.Component<Props, State>
         this.setAns = this.setAns.bind(this);
         this.updateExplanation = this.updateExplanation.bind(this);
         this.updateCorrectAns = this.updateCorrectAns.bind(this);
+        this.updateHeader = this.updateHeader.bind(this);
         this.submitQuestion = this.submitQuestion.bind(this);
     }
 

@@ -6,6 +6,8 @@ import Styles from "./LessonCardStyles";
 import { ThumbsUp } from "react-feather";
 import Lesson from "../../../types/Lesson";
 import GlobalStyles from "../../GlobalStyles";
+import EditorStyles from "../Editor/EditorStyles";
+import ReactPlayer from "react-player";
 
 type Props = {
     lesson: Lesson
@@ -21,20 +23,24 @@ export default class LessonCard extends React.Component<Props, State> {
     render() {
         return (
             <div className={cx( Styles.cardStyles, "shadow-sm" )}>
-                <div style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
-                    <iframe src={this.props.lesson.video_url} style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
+                <div style={{ width: "100%", maxWidth: 800, display: "table", marginLeft: "auto", marginRight: "auto", marginBottom: 20 }}>
+                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                        <ReactPlayer controls={false} url={ this.props.lesson.video_url } className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } width="100%" height="100%"/>
+                    </div>
                 </div>
-                <h2>
-                    <Link to={`/classroom/${this.props.lesson.id}`} className={cx( GlobalStyles.FLAT_LINK )}>{this.props.lesson.header}</Link>
-                </h2>
-                <p style={{ color: "#666", fontFamily: "Roboto, sans-serif", fontSize: 18 }}>
-                    {this.props.lesson.description}
-                </p>
-                <span style={{ fontFamily: "Space Mono, monospace", fontSize: 17 }}>
-                    <span style={{ color: "#EB5757" }}>{this.props.lesson.questions.length} Questions</span> {/*&middot; <span className={cx( Styles.upvoteStyles )}>
-                        <ThumbsUp size={23} style={{ marginBottom: 3 }}/> 546
-                    </span>*/}
-                </span>
+                <div style={{ width: "93%", display: "table", marginLeft: "auto", marginRight: "auto", margin: 5 }}>
+                    <h3 style={{ fontFamily: "Open Sans, sans-serif", fontWeight: 800 }}>
+                        <Link to={`/classroom/${this.props.lesson.id}`} className={cx( GlobalStyles.FLAT_LINK )}>{this.props.lesson.header}</Link>
+                    </h3>
+                    <p style={{ color: "#666", fontFamily: "Roboto, sans-serif", fontSize: 19 }}>
+                        {this.props.lesson.description}
+                    </p>
+                    <span style={{ fontFamily: "Space Mono, monospace", fontSize: 17 }}>
+                        <span style={{ color: "#EB5757" }}>{this.props.lesson.questions.length} Questions</span> {/*&middot; <span className={cx( Styles.upvoteStyles )}>
+                            <ThumbsUp size={23} style={{ marginBottom: 3 }}/> 546
+                        </span>*/}
+                    </span>
+                </div>
             </div>
         )
     }

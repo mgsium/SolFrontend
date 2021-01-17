@@ -61,6 +61,14 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
         this.props.addQuestionToLesson(question);
     }
 
+    formatTime(time: number) {
+        var hrs = ~~(time / 3600);
+        var mins = ~~((time % 3600) / 60);
+        var secs = ~~time % 60;
+
+        return hrs ? `${hrs}:${mins}:${secs}` : `${mins}:${secs}`;
+    }
+
     ref = (player: ReactPlayer) => {
         this.player = player;
     }
@@ -78,13 +86,19 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
                         </div>
                     </div>
                     <br/>
-                    <div style={{ color: "red", fontSize: "17pt", fontFamily: "Space Mono, monospace", display: "table", marginLeft: "auto", marginRight: "auto" }}>{this.props.questions.length} Questions</div>
-                    <br/>
                     <Row>
                         <Button variant="danger" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} onClick={this.openQuestionCreationModal}>
                             <h3 style={{ margin: 0, display: "inline-block" }}><Plus/>&nbsp;Add Question Here</h3>
                         </Button>
                     </Row>
+                    <br/>
+                    {
+                        this.props.questions.map( q => (
+                            <div className={cx( Styles.questionContainer)}>
+                                <h4 style={{ textAlign: "center", fontFamily: "Roboto, sans-serif", margin: 0 }}><strong>{q.header}</strong> ({this.formatTime(q.timestamp)})</h4>
+                            </div>
+                        ) )
+                    }
                     <br/>
                     <Row>
                         <Button variant="success" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} style={{ width: "100%" }} onClick={() => { this.setState({ finished: true }); this.props.updatePageIndex(3); this.props.submitLesson(); }}>

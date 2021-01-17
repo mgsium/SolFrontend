@@ -18,7 +18,7 @@ export default class LessonStructureMap {
         if(lessons.length >= 2) {
             const middle: number = Math.round((lessons.length - 1)/2);
             this.columnOne = this.columnOne.concat(lessons.splice(0, middle));
-            this.columnTwo = this.columnTwo.concat(lessons.splice(middle + 1));
+            this.columnTwo = this.columnTwo.concat(lessons.splice(-middle));
         } else this.columnOne = this.columnOne.concat(lessons);
     }
 

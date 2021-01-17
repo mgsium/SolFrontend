@@ -26,14 +26,15 @@ export default class QuestionPanel extends React.Component<Props, State> {
 
     render() {
         return (
-            <>
-                <h2 style={{ textAlign: "center" }}>Answer this Question</h2>
+            <div style={{ border: "1px solid #DCDCDC", background: "whitesmoke" }}>
+                <br/>
+                <h2 style={{ textAlign: "center" }}>{this.props.question.header}</h2>
                 <br/>
                 <AnswerCard active index={1} submitAnswer={this.submitAnswer}>{this.props.question.ans_one}</AnswerCard>
                 <AnswerCard index={2} submitAnswer={this.submitAnswer}>{this.props.question.ans_two}</AnswerCard>
                 <AnswerCard index={3} submitAnswer={this.submitAnswer}>{this.props.question.ans_three}</AnswerCard>
                 <AnswerCard index={4} submitAnswer={this.submitAnswer}>{this.props.question.ans_four}</AnswerCard>
-            </>
+            </div>
         )
     }
 
