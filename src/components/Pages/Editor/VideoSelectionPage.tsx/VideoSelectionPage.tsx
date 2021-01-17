@@ -23,6 +23,8 @@ type State = {
 
 export default class VideoSelectionPage extends React.Component<Props, State> {
 
+    buttonDisabled: boolean = true
+
     constructor(props: Props) {
         super(props);
 
@@ -38,6 +40,16 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
         this.setState({ videoUrl: e.target.value });
     }
 
+    checkURL(e: string) {
+        if (ReactPlayer.canPlay(e) == true) {
+            this.buttonDisabled = false
+        } 
+
+        else {
+            this.buttonDisabled = true
+        }
+    }
+
     render() {
         return (
             <div hidden={ this.props.currentPageIndex != 1 }>
@@ -51,7 +63,7 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
                             size="lg"
                             placeholder="Paste Youtube URL..."
                             className={ cx( Styles.URLBarStyles, "shadow-sm" ) }
-                            onChange={this.setVideoUrl}
+                            onChange={(e) => {this.setVideoUrl(e); this.checkURL(e.target.value)}}
                             style={{ textAlign: "center" }}
                         />
                     </Row>
@@ -64,7 +76,7 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
                     <div hidden={!!this.state.videoUrl} className={cx( EditorStyles.videoWrapperSizeModifier )} style={{ background: "rgba(0, 0, 0, 0.05)", borderRadius: 20, height: 400, display: "table", marginLeft: "auto", marginRight: "auto" }}></div>
                     <br/>
                     <Row>
-                        <Button variant="success" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} onClick={() => { this.props.updatePageIndex(2); this.props.confirmVideoUrl(this.state.videoUrl); }}>
+                        <Button variant="success" disabled={this.buttonDisabled} className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} onClick={() => { this.props.updatePageIndex(2); this.props.confirmVideoUrl(this.state.videoUrl); }}>
                             <h3 style={{ margin: 0, display: "inline-block" }}>Confirm Video&nbsp;<ArrowRight/></h3>
                         </Button>
                     </Row>

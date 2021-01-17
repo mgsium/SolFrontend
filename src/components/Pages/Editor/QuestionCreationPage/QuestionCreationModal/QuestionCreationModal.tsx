@@ -21,7 +21,7 @@ type State = {
 
 export default class QuestionCreationModal extends React.Component<Props, State> {
 
-    headerCharacterLimit: 100;
+    headerCharacterLimit: number = 100;
     answerCharacterLimit: number = 160;
     explanationCharacterLimit: number = 400;
 

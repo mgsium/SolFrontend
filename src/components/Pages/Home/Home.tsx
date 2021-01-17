@@ -85,7 +85,7 @@ export default class Home extends React.Component<Props, State> {
                                     Github
                                 </Button>
                             </a>
-                            <a href="" target="_blank">
+                            <a href="https://devpost.com/software/sol-learning-made-easy-learntosol-com" target="_blank">
                                 <Button className={ cx( Styles.HeaderButton ) }>
                                     <LinkIcon/>
                                     &nbsp;
