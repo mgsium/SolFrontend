@@ -7,13 +7,14 @@ import VideoSelectionPage from "./VideoSelectionPage.tsx/VideoSelectionPage";
 import LessonBuilder from "./LessonBuilder";
 import QuestionCreationPage from "./QuestionCreationPage/QuestionCreationPage";
 import Question from "../../../types/Question";
-import Lesson from "../../../types/Lesson";
+import Lesson from '../../../types/Lesson';
 import LessonSwitch from "../../../httpclient/LessonSwitch";
+import ConfirmationPage from "./ConfirmationPage/ConfirmationPage";
 
 type Props = {};
 type State = {
     showingLessonPage: boolean,
-    currentPageIndex: 0 | 1 | 2 ,
+    currentPageIndex: 0 | 1 | 2 | 3,
     lessonBuilder: LessonBuilder,
     questions: Array<Question>
 };
@@ -62,7 +63,7 @@ export default class Editor extends React.Component<Props, State> {
         this.setState({ questions: questions });
     }
 
-    updatePageIndex(index: 0 | 1 | 2) {
+    updatePageIndex(index: 0 | 1 | 2 | 3) {
         this.setState({ currentPageIndex: index });
     }
 
@@ -93,6 +94,12 @@ export default class Editor extends React.Component<Props, State> {
                         addQuestionToLesson={this.addQuestionToLesson}
                         questions={this.state.questions}
                         submitLesson={this.submitLesson}
+                    />
+                    <ConfirmationPage
+                        currentPageIndex={this.state.currentPageIndex}
+                        updatePageIndex={this.updatePageIndex}
+                        header={this.state.lessonBuilder.getHeader()}
+                        author_name={this.state.lessonBuilder.getAuthorName()}
                     />
             </Template>
         )
