@@ -1,5 +1,6 @@
 export default class QuestionBuilder {
 
+    private header: string;
     private ans_one: string;
     private ans_two: string;
     private ans_three: string;
@@ -10,6 +11,10 @@ export default class QuestionBuilder {
 
     constructor() {
         this.correct_ans = 1;
+    }
+
+    public setHeader(header: string) {
+        this.header = header;
     }
 
     public setAnsOne(ans_one: string) {
@@ -38,6 +43,10 @@ export default class QuestionBuilder {
 
     public setTimestamp(timestamp: number) {
         this.timestamp = timestamp;
+    }
+
+    public getHeader() {
+        return this.header;
     }
 
     public getAnsOne() {
@@ -76,6 +85,7 @@ export default class QuestionBuilder {
         return {
             // @ts-ignore
             id: null,
+            header: this.header,
             ans_one: this.ans_one,
             ans_two: this.ans_two,
             ans_three: this.ans_three,

@@ -7,8 +7,11 @@ export default class LessonBuilder {
     private video_url: string;
     private author_name: string;
     private more_info: string;
+    private questions: Array<Question>
 
-    public LessonBuilder() {}
+    public constructor() {
+        this.questions = new Array<Question>();
+    }
 
     public setHeader(header: string) {
         this.header = header;
@@ -28,6 +31,10 @@ export default class LessonBuilder {
 
     public setMoreInfo(more_info: string) {
         this.more_info = more_info;
+    }
+
+    public setQuestions(questions: Array<Question>) {
+        this.questions = questions;
     }
 
     public getHeader() {
@@ -60,7 +67,7 @@ export default class LessonBuilder {
             author_name: this.author_name,
             more_info: this.more_info,
             timestamp: "",
-            questions: new Array<Question>()
+            questions: this.questions
         }
     }
 

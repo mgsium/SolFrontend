@@ -21,11 +21,13 @@ type Props = {
     updatePageIndex: Function,
     videoUrl: string,
     addQuestionToLesson: Function,
-    questions: Array<Question>
+    questions: Array<Question>,
+    submitLesson: Function
 };
 type State = {
     showQuestionCreationModal: boolean,
-    mostRecentTimestamp: number
+    mostRecentTimestamp: number,
+    finished: boolean
 };
 
 export default class QuestionCreationPage extends React.Component<Props, State> {
@@ -36,7 +38,8 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
 
         this.state = {
             showQuestionCreationModal: false,
-            mostRecentTimestamp: 0
+            mostRecentTimestamp: 0,
+            finished: false
         }
 
         // Method Bindings
@@ -69,7 +72,7 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
                     <h1 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif" }}>Add Questions</h1>
                     <h6 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif", color: "#6c757d" }}>Set questions at specific points in the video to help your audience better engage with their learning!</h6>
                     <br/>
-                    <ReactPlayer ref={this.ref} controls url={ this.props.videoUrl } playing={!this.state.showQuestionCreationModal} className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) }/>
+                    <ReactPlayer ref={this.ref} controls url={ this.props.videoUrl } playing={!this.state.showQuestionCreationModal && !this.state.finished} className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) }/>
                     <br/>
                     <div style={{ color: "red", fontSize: "17pt", fontFamily: "Space Mono, monospace", display: "table", marginLeft: "auto", marginRight: "auto" }}>{this.props.questions.length} Questions</div>
                     <br/>
@@ -80,7 +83,7 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
                     </Row>
                     <br/>
                     <Row>
-                        <Button variant="success" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} style={{ width: "100%" }} onClick={() => {  }}>
+                        <Button variant="success" className={cx( EditorStyles.submitButtonStyles, "shadow-sm" )} style={{ width: "100%" }} onClick={() => { this.setState({ finished: true }); this.props.updatePageIndex(3); this.props.submitLesson(); }}>
                             <h3 style={{ margin: 0, display: "inline-block" }}>Finish!&nbsp;<ArrowRight/></h3>
                         </Button>
                     </Row>

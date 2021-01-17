@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router";
 
 import { cx } from "emotion";
 import Styles from "./ClassroomStyles";
@@ -6,6 +7,9 @@ import Template from "../Template/Template";
 import Lesson from "../../../types/Lesson";
 import LessonSwitch from "../../../httpclient/LessonSwitch";
 import QuestionPanel from "./QuestionPanel/QuestionPanel";
+import EditorStyles from "../Editor/EditorStyles";
+import ReactPlayer from "react-player";
+import Col from "react-bootstrap/esm/Col";
 
 type Props = {};
 type State = {
@@ -23,7 +27,8 @@ export default class Classroom extends React.Component<Props, State> {
             lesson: null
         }
 
-        LessonSwitch.getLesson("hardly-done-here", this)
+        // @ts-expect-error
+        LessonSwitch.getLesson(this.props.match.params.id, this)
     }
 
     render() {
@@ -38,16 +43,19 @@ export default class Classroom extends React.Component<Props, State> {
         return (
             <Template>
                 <h2 style={{ textAlign: "center", fontFamily: "Open Sans, sans-serif" }}>{this.state.lesson.header}</h2>
+                <p style={{ textAlign: "center", fontFamily: "Roboto, sans-serif", color: "#666" }}>{this.state.lesson.description}</p>
                 <br/>
-                <div style={{ position: "relative", paddingBottom: "56.25%", marginBottom: 10 }}>
-                    <iframe src={this.state.lesson.video_url} style={{ position: "absolute", borderRadius: 20, width: "100%", height: "100%", borderBottom: 10 }} frameBorder={0} allowFullScreen></iframe>
+                <div>
+                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                        <ReactPlayer url={ this.state.lesson.video_url } className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } width="100%" height="100%"/>
+                    </div>
                 </div>
                 <br/>
-                <QuestionPanel question={this.state.lesson.questions[0]}/>
+                <div hidden>
+                    <QuestionPanel question={this.state.lesson.questions[0]}/>
+                </div>
                 <hr/>
                 <div style={{ textAlign: "center" }}>
-                    <small style={{ fontWeight: "bold", fontFamily: "Roboto, sans-serif" }}>DESCRIPTION</small>
-                    <p style={{ fontFamily: "Roboto, sans-serif"}}>{this.state.lesson.description}</p>
                     <small style={{ fontWeight: "bold", fontFamily: "Roboto, sans-serif" }}>AUTHOR</small>
                     <p style={{ fontFamily: "Roboto, sans-serif"}}>{this.state.lesson.author_name}</p>
                     <small style={{ fontWeight: "bold", fontFamily: "Roboto, sans-serif" }}>MORE ABOUT THE AUTHOR</small>

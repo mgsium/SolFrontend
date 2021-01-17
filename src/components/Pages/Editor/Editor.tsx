@@ -1,23 +1,14 @@
 import React from "react";
 
-import { cx } from "emotion";
-import Styles from "./EditorStyles";
 import Template from "../Template/Template";
-import SectionHeader from "./SectionHeader/SectionHeader";
-import Button from "react-bootstrap/esm/Button";
-import Form from "react-bootstrap/esm/Form";
-import Col from "react-bootstrap/esm/Col";
-import Row from "react-bootstrap/esm/Row";
-import { ArrowRight } from "react-feather";
-import SectionBody from "./SectionBody/SectionBody";
-import QuestionPanel from '../Classroom/QuestionPanel/QuestionPanel';
 
-import ReactPlayer from "react-player"
 import InitialDetailPage from "./InitialDetailPage/InitialDetailPage";
 import VideoSelectionPage from "./VideoSelectionPage.tsx/VideoSelectionPage";
 import LessonBuilder from "./LessonBuilder";
 import QuestionCreationPage from "./QuestionCreationPage/QuestionCreationPage";
 import Question from "../../../types/Question";
+import Lesson from "../../../types/Lesson";
+import LessonSwitch from "../../../httpclient/LessonSwitch";
 
 type Props = {};
 type State = {
@@ -45,6 +36,7 @@ export default class Editor extends React.Component<Props, State> {
         this.confirmVideoUrl = this.confirmVideoUrl.bind(this);
         this.updatePageIndex = this.updatePageIndex.bind(this);
         this.addQuestionToLesson = this.addQuestionToLesson.bind(this);
+        this.submitLesson = this.submitLesson.bind(this);
     }
 
     confirmInitialDetails(header: string, description: string, author_name: string, more_info: string) {
@@ -74,6 +66,13 @@ export default class Editor extends React.Component<Props, State> {
         this.setState({ currentPageIndex: index });
     }
 
+    submitLesson() {
+        const lessonBuilder: LessonBuilder = this.state.lessonBuilder;
+        lessonBuilder.setQuestions(this.state.questions);
+        const lesson: Lesson = lessonBuilder.getLesson();
+        LessonSwitch.createLesson(lesson);
+    }
+
     render() {
         return (
             <Template>
@@ -93,6 +92,7 @@ export default class Editor extends React.Component<Props, State> {
                         videoUrl={this.state.lessonBuilder.getVideoUrl()}
                         addQuestionToLesson={this.addQuestionToLesson}
                         questions={this.state.questions}
+                        submitLesson={this.submitLesson}
                     />
             </Template>
         )

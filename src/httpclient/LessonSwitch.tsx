@@ -1,4 +1,6 @@
 import LessonStructureMap from "../helpers/LessonStructureMap";
+import Lesson from "../types/Lesson";
+import Question from "../types/Question";
 
 export default class LessonSwitch {
     static backend_url = "http://localhost:8443";
@@ -58,6 +60,33 @@ export default class LessonSwitch {
             lessonStructureMap.addLessons(data); 
             component.setState({ lessonStructureMap: lessonStructureMap });
         } );
+    }
+
+    // TODO: Change to a request which creates multiple Question objects and a lesson object at once.
+
+
+    // TODO: Add Error Handling
+    static async createLesson(lesson: Lesson) {
+        await fetch(`${this.backend_url}${this.lesson_controller_path}/new`, {
+            "headers": this.std_post_req_headers,
+            "referrerPolicy": "strict-origin-when-cross-origin",
+            "method": "POST",
+            "mode": "cors",
+            "credentials": "include",
+            body: JSON.stringify(lesson)
+        });
+    }
+
+    // TODO: Add Error Handling
+    static async createQuestion(question: Question, lesson_id: string) {
+        await fetch(`${this.backend_url}${this.lesson_controller_path}/question/new/${lesson_id}`, {
+            "headers": this.std_post_req_headers,
+            "referrerPolicy": "strict-origin-when-cross-origin",
+            "method": "POST",
+            "mode": "cors",
+            "credentials": "include",
+            body: JSON.stringify(question)
+        });
     }
 
 }

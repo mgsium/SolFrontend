@@ -19,6 +19,7 @@ type State = {
 
 export default class QuestionCreationModal extends React.Component<Props, State> {
 
+    headerCharacterLimit: 100;
     answerCharacterLimit: number = 160;
     explanationCharacterLimit: number = 400;
 
@@ -36,6 +37,13 @@ export default class QuestionCreationModal extends React.Component<Props, State>
         this.submitQuestion = this.submitQuestion.bind(this);
     }
 
+    updateHeader(e: any) {
+        if(e.target.value.length > this.headerCharacterLimit) return;
+        const questionBuilder: QuestionBuilder = this.state.questionBuilder;
+        questionBuilder.setHeader(e.target.value);
+        this.setState({ questionBuilder: questionBuilder });
+    }
+
     setAns(index: 1 | 2 | 3 | 4, e: any) {
         if(e.target.value.length > this.answerCharacterLimit) return;
         const questionBuilder: QuestionBuilder = this.state.questionBuilder;
@@ -50,7 +58,6 @@ export default class QuestionCreationModal extends React.Component<Props, State>
 
     updateCorrectAns(e: any) {
         const questionBuilder: QuestionBuilder = this.state.questionBuilder;
-        console.log(e.target.value);
         questionBuilder.setCorrectAns(e.target.value);
         this.setState({ questionBuilder: questionBuilder });
     }
@@ -79,6 +86,21 @@ export default class QuestionCreationModal extends React.Component<Props, State>
                 <Modal.Body style={{ fontFamily: "Roboto, sans-serif" }}>
                     <div style={{ width: "75%", display: "table", marginLeft: "auto", marginRight: "auto" }}>
                     <Form>
+                        <Form.Group controlId="formQuestionHeader">
+                            <Form.Label>Question</Form.Label>
+                            <Form.Control 
+                                placeholder="Enter a Question..." 
+                                size="lg"
+                                maxLength={this.headerCharacterLimit}
+                                value={this.state.questionBuilder.getHeader()}
+                                onChange={this.updateHeader}
+                                onFocus={this.updateHeader}
+                            />
+                            <Form.Text className="text-muted">
+                                Type the question you want to ask here.
+                                <span style={{float: 'right'}}>{this.state.questionBuilder.getHeader() ? this.state.questionBuilder.getHeader().length : 0} / {this.headerCharacterLimit}</span>
+                            </Form.Text>
+                        </Form.Group>
                         <Form.Group controlId="formQuestionOptionOne">
                             <Form.Label>Option One</Form.Label>
                             <Form.Control 
