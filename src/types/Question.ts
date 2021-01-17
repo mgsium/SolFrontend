@@ -4,7 +4,8 @@ type Question = {
     ans_two: string,
     ans_three: string,
     ans_four: string,
-    correct_ans: number
+    correct_ans: number,
+    timestamp: number
 }
 
 export default Question

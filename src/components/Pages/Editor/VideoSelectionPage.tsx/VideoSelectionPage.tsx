@@ -39,13 +39,15 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
     render() {
         return (
             <div hidden={ this.props.currentPageIndex != 1 }>
+                <h1 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif" }}>Choose a Video</h1>
+                <br/>
                 <Col>
                     <Row>
                         <Form.Control 
                             id="lesson-youtube-url"
                             type="text" 
                             size="lg"
-                            placeholder="Input Youtube URL..."
+                            placeholder="Paste Youtube URL..."
                             className={ cx( Styles.URLBarStyles, "shadow-sm" ) }
                             onChange={this.setVideoUrl}
                             style={{ textAlign: "center" }}
@@ -60,7 +62,6 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
                             <h3 style={{ margin: 0, display: "inline-block" }}>Confirm Video&nbsp;<ArrowRight/></h3>
                         </Button>
                     </Row>
-
                 </Col>
             </div> 
         )

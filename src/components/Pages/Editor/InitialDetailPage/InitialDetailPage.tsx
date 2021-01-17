@@ -62,7 +62,8 @@ export default class InitialDetailPage extends React.Component<Props, State> {
     }
 
     updateMoreInfoField(e: any) {
-        // TODO: Implement Callback
+        if(e.target.value.length > this.moreInfoCharacterLimit) return;
+        this.setState({ more_info: e.target.value });
     }
 
     render() {
@@ -70,7 +71,6 @@ export default class InitialDetailPage extends React.Component<Props, State> {
             <div id="lessonDetailsPage" hidden={ this.props.currentPageIndex != 0 }>
                 <h1 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif" }}>Create a Lesson</h1>
                 <h6 style={{ textAlign: "center", margin: "50px 0px", fontFamily: "Open Sans, sans-serif", color: "#6c757d" }}>Add the details here - You'll create the actual lesson on the next page</h6>
-
                 <SectionHeader>Header & Description</SectionHeader>
                 <br/>
                 <SectionBody>

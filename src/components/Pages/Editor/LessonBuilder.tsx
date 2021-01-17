@@ -30,6 +30,26 @@ export default class LessonBuilder {
         this.more_info = more_info;
     }
 
+    public getHeader() {
+        return this.header;
+    }
+
+    public getDescription() {
+        return this.description;
+    }
+
+    public getVideoUrl() {
+        return this.video_url;
+    }
+
+    public getAuthorName() {
+        return this.author_name;
+    }
+
+    public getMoreInfoField() {
+        return this.more_info;
+    }
+
     public getLesson() {
         return {
             //@ts-ignore
