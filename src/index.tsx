@@ -12,6 +12,6 @@ WebFont.load({
 })
 
 ReactDOM.render(
-    <App dark={true}/>,
+    <App />,
     document.getElementById("app")
 )
