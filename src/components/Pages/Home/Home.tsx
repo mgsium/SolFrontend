@@ -12,7 +12,7 @@ import Styles from "./HomeStyles";
 import Template from "../Template/Template";
 import Col from "react-bootstrap/esm/Col";
 
-import { GitHub, Heart, Link as LinkIcon, Plus, Search } from "react-feather";
+import { FileText, GitHub, Heart, Link as LinkIcon, Plus, Search } from "react-feather";
 import LessonCard from "../LessonCard/LessonCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -78,6 +78,13 @@ export default class Home extends React.Component<Props, State> {
                     <h1 style={{ fontFamily: "Open Sans, sans-serif", marginBottom: 20 }}>Learning Made <span style={{ fontWeight: 600, color: "#EA6400" }}>Easy</span></h1>
                     <Row>
                         <div style={{ display: "table", marginLeft: "auto", marginRight: "auto" }}>
+                            <Link to="/about">
+                                <Button className={ cx( Styles.HeaderButton ) }>
+                                    <FileText/>
+                                    &nbsp;
+                                    About
+                                </Button>
+                            </Link>
                             <a href="https://github.com/mgsium/SolFrontend" target="_blank">
                                 <Button className={ cx( Styles.HeaderButton ) }>
                                     <GitHub/>
