@@ -5,7 +5,7 @@ Sol
 
 Sol is a web app for creating and sharing short-form, interactive lessons. Visit www.learnwithsol.com.
 
-This repository contains the frontend React-Typescript application which uses [the Sol backend api](https://github.com/mgsium/SolBackend) for backend functionality.
+This repository contains the frontend React-Typescript application which uses [the Sol api](https://github.com/mgsium/SolBackend) for backend functionality.
 
 #### Contributors
 <a href="https://github.com/mgsium/SolFrontend/graphs/contributors">
