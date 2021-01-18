@@ -62,11 +62,22 @@ export default class QuestionCreationPage extends React.Component<Props, State> 
     }
 
     formatTime(time: number) {
-        var hrs = ~~(time / 3600);
-        var mins = ~~((time % 3600) / 60);
-        var secs = ~~time % 60;
+        var hrs = (~~(time / 3600)).toString();
+        var mins = (~~((time % 3600) / 60)).toString();
+        var secs = (~~time % 60).toString();
+        
+        if (parseInt(hrs) != 0) {
+            if (parseInt(mins) < 10) {
+                mins = "0" + mins;
+            }
+        }
 
-        return hrs ? `${hrs}:${mins}:${secs}` : `${mins}:${secs}`;
+        if (parseInt(secs) < 10) {
+            secs = "0" + secs;
+        }
+
+        return (parseInt(hrs) != 0) ? `${hrs}:${mins}:${secs}` : `${mins}:${secs}`;
+
     }
 
     ref = (player: ReactPlayer) => {
