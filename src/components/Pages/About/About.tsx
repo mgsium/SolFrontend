@@ -31,7 +31,7 @@ export default class About extends React.Component<Props, State> {
                     <p className={ cx( Styles.regParagraph )}>
                         A <span>Lesson</span> consists of:
                         <ul>
-                            <li>A YouTube Video</li>
+                            <li>A <span>YouTube Video</span></li>
                             <li>Multiple-choice questions, each linked to a timestamp specified by the Lesson's Creator</li>
                         </ul>
                     </p>
