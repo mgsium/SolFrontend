@@ -40,7 +40,7 @@ export default class ConfirmationPage extends React.Component<Props, State> {
 
                 <OverlayTrigger
                     placement="bottom"
-                    overlay={<Tooltip id="button-tooltip-2">Copy to clipboard</Tooltip>}
+                    overlay={<Tooltip id="button-tooltip-2"><span><Clipboard height={18}/>&nbsp;Copy to clipboard</span></Tooltip>}
                 >
                     <div className={cx(Styles.wrapperStyles, "shadow-sm")}>
                         <h2 style={{ margin: 0, textAlign: "center", fontFamily: "Open Sans, sans-serif", fontWeight: "bold", color:"#EA6400" }}>{this.props.header}</h2>
