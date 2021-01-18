@@ -5,9 +5,24 @@ import Editor from "./components/Pages/Editor/Editor";
 import Home from "./components/Pages/Home/Home";
 
 type State = {};
-type Props = {};
+type Props = {
+    dark: boolean
+};
 
 export default class App extends React.Component<Props, State> {
+
+    componentDidUpdate() {
+        const favicon = document.getElementById("favicon");
+        console.log("SHUAIDHIUASHDUAS");
+
+        if (this.props.dark == true) {
+            favicon.setAttribute("href", "/public/SolLogoDark.ico")
+        } else {
+            favicon.setAttribute("href", "/public/SolLogo.ico")
+        }
+
+    }
+
     render() {
         return (
             <BrowserRouter>
