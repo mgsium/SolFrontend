@@ -19,7 +19,8 @@ type Props = {
 };
 type State = {
     videoUrl: string,
-    playing: boolean
+    playing: boolean,
+    vidPlaying: boolean
 };
 
 export default class VideoSelectionPage extends React.Component<Props, State> {
@@ -31,7 +32,8 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
 
         this.state = {
             videoUrl: "",
-            playing: false
+            playing: false,
+            vidPlaying: false
         }
 
         // Method Bindings
@@ -53,7 +55,17 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
     }
 
     stopVid() {
-        this.setState({ playing: true }, () => {this.setState({ playing:false })});
+        if (this.state.vidPlaying == true) {
+            this.setState({ playing: true }, () => {this.setState({ playing:false })});
+        }
+    }
+
+    setVidPlayingTrue() {
+        this.setState({ vidPlaying:  true})
+    }
+
+    setVidPlayingFalse() {
+        this.setState({ vidPlaying:  false})
     }
 
     render() {
@@ -76,7 +88,7 @@ export default class VideoSelectionPage extends React.Component<Props, State> {
                     <br/>
                     <div style={{ width: "100%", maxWidth: 800, display: "table", marginLeft: "auto", marginRight: "auto" }}>
                         <div style={{ position: "relative", paddingTop: "56.25%" }}>
-                            <ReactPlayer url={ this.state.videoUrl } playing={this.state.playing} className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } hidden={!this.state.videoUrl} width="100%" height="100%"/>
+                            <ReactPlayer url={ this.state.videoUrl } playing={this.state.playing} onPlay={() => { this.setVidPlayingTrue() }} onPause={() => { this.setVidPlayingFalse() }} className={ cx( EditorStyles.videoWrapperSizeModifier, EditorStyles.videoWrapper) } hidden={!this.state.videoUrl} width="100%" height="100%"/>
                         </div>
                     </div>
                     <div hidden={!!this.state.videoUrl} className={cx( EditorStyles.videoWrapperSizeModifier )} style={{ background: "rgba(0, 0, 0, 0.05)", borderRadius: 20, height: 400, display: "table", marginLeft: "auto", marginRight: "auto" }}></div>
