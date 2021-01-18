@@ -82,9 +82,10 @@ export default class About extends React.Component<Props, State> {
                         </ul>
                         You can congratulate yourself here - you've just created a full Lesson on Sol! You can <span>copy the link</span> to your tutorial before you return to the homepage and <span>share</span> it with your friends, colleagues or students.
                     </p>
+                    <br/>
                     <div>
                         <Link to="/" style={{ display: "table", marginLeft: "auto", marginRight: "auto", textDecoration: "none" }}>
-                            <Button variant="outline-secondary" className={cx( Styles.homeButtonStyles, "shadow-sm" )}>
+                            <Button variant="outline-secondary" size="lg" className={cx( Styles.homeButtonStyles, "shadow-sm" )}>
                                 Return To Home
                             </Button>
                         </Link>
